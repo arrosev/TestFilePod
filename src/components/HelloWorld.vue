@@ -1,63 +1,94 @@
-<!-- <script setup>
-import { ref } from 'vue'
-
-defineProps({
-  msg: String
-})
-
-const count = ref(0)
-</script> -->
-
 <template>
-  <!-- <h1>{{ msg }}</h1>
-
-  <p>
-    Recommended IDE setup:
-    <a href="https://code.visualstudio.com/" target="_blank">VS Code</a>
-    +
-    <a href="https://github.com/johnsoncodehk/volar" target="_blank">Volar</a>
-  </p>
-
-  <p>
-    <a href="https://vitejs.dev/guide/features.html" target="_blank">
-      Vite Documentation
-    </a>
-    |
-    <a href="https://v3.vuejs.org/" target="_blank">Vue 3 Documentation</a>
-  </p>
-
-  <button type="button" @click="count++">count is: {{ count }}</button>
-  <p>
-    Edit
-    <code>components/HelloWorld.vue</code> to test hot module replacement.
-  </p> -->
-
-  <input id = "file" type = "file" @change="fileSelect">
+  <div class="main" v-infinite-scroll="load">
+    <el-card class="app-card" v-for="item in appListData">
+      <template #header>
+        <div class="app-card-header">
+          <span>Tumblew</span>
+          <el-image />
+          <!-- <el-button class="button" text>Operation button</el-button> -->
+        </div>
+      </template>
+      <el-button>安装</el-button>
+      <el-button>扫码</el-button>
+      <el-button>详情</el-button>
+      <!-- <div v-for="o in 4" :key="o" class="text item">{{ 'List item ' + o }}</div> -->
+    </el-card>
+  </div>
+  
 </template>
 
 <script>
-
-import AppInfoParser from "app-info-parser"
-
-export default {
-  methods: {
-    fileSelect() {
-      const file = document.getElementById('file').files[0]
-      const parser = new AppInfoParser(file) // or xxx.ipa
-      parser.parse().then(result => {
-        console.log('app info ----> ', result)
-        console.log('icon base64 ----> ', result.icon)
-      }).catch(err => {
-        console.log('err ----> ', err)
-      })
-    }
+  export default {
+      data() {
+          return {
+              appListData: [
+                "Tumblew",
+                "Tumblew",
+                "Tumblew",
+                "Tumblew",
+                "Tumblew",
+                "Tumblew",
+                "Tumblew",
+                "Tumblew",
+                "Tumblew",
+                "Tumblew",
+                "Tumblew",
+                "Tumblew"
+              ]
+          }
+      },
+      methods: {
+        load() {
+          console.log("bottom-----bottom")
+        }
+      },
+      //生命周期 - 创建完成,访问当前this实例
+      created() {
+          
+      },
+      //生命周期 - 挂载完成,访问DOM元素
+      mounted() {
+          
+      }
   }
-}
-
 </script>
 
 <style scoped>
-a {
-  color: #42b983;
+/* @import url(); 引入css类 */
+
+.main {
+  width: calc(90vw + 20px);
+  height: calc(100vh - 164px);
+  padding-top: 25px;
+  padding-bottom: 25px;
+  margin: 0 auto;
+  background-color: lightgray;
+  display: grid;
+  justify-content: space-evenly;
+  grid-template-columns: repeat(auto-fill, 250px);
+  grid-template-rows: repeat(auto-fill, 150px);
+  grid-gap: 20px;
+  gap: 20px;
+  overflow: auto;
+  
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+
+  border-radius: 5px;
+}
+
+.main::-webkit-scrollbar {
+  display:none;/*隐藏滚动条*/
+}
+
+.app-card {
+  width: 250px;
+  height: 150px;
+}
+
+.app-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 </style>
